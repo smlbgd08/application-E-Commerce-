@@ -1,0 +1,50 @@
+<div class="" *ngIf="products">
+  <div class="centerDiv">
+    <h3> <span class="badge badge-warning">{{titrePage}}</span> </h3>
+  </div>
+<div class="row">
+<div class="col-md-4" *ngFor="let p of products">
+  <div class="card text-center heighrd">
+    <div style="color: cornsilk" class="card-header bg-primary "> 
+     <b > {{p.name}}</b> 
+      
+
+      
+    </div>
+    <div class="card-body">
+      <img (click)="showDetailProduct(p.id)"   src="{{this.productservice.host+'photoProduct/'+p.id+'?ts'+timeStamp}}" class="img-responsive img-thumbnail sizeImg " alt="empty">
+      <!--  -->
+      <div *ngIf="authService.isadmin == 'ADMIN'" >
+      <button (click)="isEditPhoto(p.id)" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+    </div>
+
+      <p *ngIf="editPhoto==true && currentPhotoEdit==p.id ">
+      <input (change)="onSelectFile($event)"  class="mt-1" type="file" name="" id="">
+      <button class="btn btn-success" (click)="uploadPhoto()">Upload</button>
+    </p>
+    <div class="float-left">
+    <p class="">
+    <strong> Prix : </strong>  <span class="badge badge-warning">{{p.currentprice}}</span> </p>
+  
+ 
+    <p class="">
+      <strong> Quantité :  </strong> 
+      <input id="quantite" name="quantite" [(ngModel)]="p.quantity" style="width: 40px;" type="number" >     
+        <a (click)='addTocardCaddy(p ,p.quantity )' > 
+        <img src="assets/images/shop.png"  width="30px" alt=""></a> 
+    </p> 
+      <div class="form-group img">
+        
+        <img *ngIf="p.availabe==true"  src="assets/images/disp.jpg" width="30px"  alt=""> 
+        <img *ngIf="p.promotion==true" src="assets/images/prm.jpg" width="30px"  alt="">
+        <img *ngIf="p.selected==true" src="assets/images/favorite.png" width="30px" alt="">
+
+      </div>
+   
+    </div>
+
+    </div>
+  </div>
+</div>
+</div>
+</div>

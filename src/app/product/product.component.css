@@ -1,0 +1,15 @@
+.centerDiv{
+    width: 30%;
+  margin: 0 auto;
+}
+.img{
+    margin-top: -10px;
+    margin-left: -25px;
+}
+.sizeImg{
+    width: 200px;
+    height: 200px;
+}
+.heighrd{
+    height: 425px;
+}

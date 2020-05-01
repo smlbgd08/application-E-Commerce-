@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-header bg-primary text-center ">  <b style="color :azure"> List of caddies </b> </div>
+  <div class="card-body">
+
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let pi of caddyService.getCurrentCaddy()" >
+          <th scope="row">{{pi.items.product.id}}</th>
+          <td>{{pi.items.product.name}}</td>
+          <td>{{pi.items.product.quantity}}</td>
+          <td>{{pi.items.product.currentprice}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="showModal=true ; selectCadyy(pi.items)"><i class="fa fa-trash"></i></button></td>
+        </tr>
+      <tr>
+        <td colspan="3" class="text-right">Total : </td>
+        <td colspan="3"><b> {{caddyService.getTotal()}} TTC  </b> </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>  
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show' : showModal}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Remove Caddy</h5>
+        <button type="button" (click)="showModal=false"  class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to remove this caddy ??</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="deleteCaddy()" class="btn btn-danger">Confirme</button>
+        <button type="button" class="btn btn-secondary" (click)="showModal=false" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

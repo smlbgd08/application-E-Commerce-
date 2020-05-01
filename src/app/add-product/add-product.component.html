@@ -1,0 +1,125 @@
+<!-- section Add -->
+<div *ngIf="addOrUpdate==false">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <div class="row">
+      <div class="col-md-7 ">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Name :</label>
+          <input ngModel  name="name" id="name" type="text" class="form-control"  placeholder="Name">
+        </div>
+      </div>
+      <div class="col-md-5 mt-2">
+        <input (change)="onSelectFile($event)"  class="mt-1" type="file" name="" id=""> <br>
+       
+      </div>
+    </div>
+ 
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Description :</label>
+  <textarea ngModel class="form-control" name="description" id="description" cols="30" rows="2"></textarea> 
+ </div>
+
+ <select ngModel id="category" name="category" class="browser-default custom-select">
+  <option *ngFor="let ctg of categories" [ngValue]="ctg" >{{ctg.name}}</option>
+  
+</select>
+
+ <div class="form-group">
+  <label for="formGroupExampleInput">Prix :</label>
+  <input ngModel  type="text"  id="currentprice" name="currentprice" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+</div>
+
+
+<div class="form-check ">
+  <label class="form-check-label  " for="inlineCheckbox1">Promotion : </label>
+  <input ngModel class=" ckeck" id="promotion" name="promotion"    type="checkbox"  >
+
+</div>
+
+<div class="form-check mt-1">
+  <label class="form-check-label " for="inlineCheckbox1">Selection :  </label>
+  <input ngModel id="selected" name="selected"  type="checkbox" id="inlineCheckbox1" value="option1">
+
+</div>
+
+<div class="form-check mt-1">
+  <label class="form-check-label " for="inlineCheckbox1"> Availabe :  </label>
+  <input ngModel id="availabe" name="availabe"  type="checkbox" id="inlineCheckbox1" value="option1">
+</div>
+
+<div class="form-check mt-1 ml-6">
+  <button  type="submit" class="btn btn-success">Add Product</button>
+  <button  type="submit" class="btn btn-info ml-2">Cancel</button>
+</div>
+</form>
+</div>
+
+<!-- section update  -->
+<div *ngIf="currentProduct && addOrUpdate == true" >
+  <div class="form-group">
+    <label for="formGroupExampleInput">Name :</label>
+    <input [(ngModel)]="currentProduct.name" type="text" class="form-control" id="name" placeholder="Example input">
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Description :</label>
+  <textarea [(ngModel)]="currentProduct.description" class="form-control" name="" id="" cols="30" rows="2"></textarea> 
+ </div>
+
+ 
+
+<select [(ngModel)]="currentProduct.category" class="browser-default custom-select" >
+  <option  *ngFor="let ctg of categories" [ngValue]="ctg" [selected]="ctg.id == currentProduct.category.id"   >
+       {{ctg.name}} 
+   </option>
+</select>
+
+ <div class="form-group">
+  <label for="formGroupExampleInput">Prix :</label>
+  <input  type="text" [(ngModel)]="currentProduct.currentprice" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+</div>
+
+
+<div class="form-check ">
+  <label class="form-check-label  " for="inlineCheckbox1">Promotion :</label>
+  <input class=" ckeck" [(ngModel)]="currentProduct.promotion" [checked]=""   type="checkbox" id="inlineCheckbox1" value="option1">
+
+</div>
+
+<div class="form-check ">
+  <label class="form-check-label " for="inlineCheckbox1">Selection :</label>
+  <input [(ngModel)]="currentProduct.selected" [checked]="currentProduct?.selected"  type="checkbox" id="inlineCheckbox1" value="option1">
+
+</div>
+
+<div class="form-check ">
+  <label class="form-check-label " for="inlineCheckbox1"> Availabe :</label>
+  <input [(ngModel)]="currentProduct.availabe" [checked]="currentProduct?.availabe"  type="checkbox" id="inlineCheckbox1" value="option1">
+</div>
+
+<div class="form-check ">
+  <button (click)="updateProduct()" class="btn btn-success">update</button>
+  <button (click)="showModal=true ; selectCadyy(currentProduct)" class="btn btn-danger ml-1">delete</button>
+</div>
+
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show' : showModal}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Remove Caddy</h5>
+        <button type="button" (click)="showModal=false"  class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to remove this caddy ??</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="deleteProduct()" class="btn btn-danger">Confirme</button>
+        <button type="button" class="btn btn-secondary" (click)="showModal=false" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
